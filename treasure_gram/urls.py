@@ -21,4 +21,5 @@ from main_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.index),
+    url(r'^([0-9]+)/$', views.detail, name = 'detail'),
 ]
