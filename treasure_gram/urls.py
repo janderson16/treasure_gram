@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^([0-9]+)/$', views.detail, name = 'detail'),
     url(r'^post_treasure/$', views.post_treasure, name = 'post_treasure'),
+    url(r'^login/$', views.login_view, name='login'),
 ]
 
 if settings.DEBUG:

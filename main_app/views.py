@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import Treasure
 from .forms import TreasureForm
+from .forms import LoginForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
@@ -27,5 +29,24 @@ def post_treasure(request):
         treasure = form.save(commit = False)
         treasure.user=request.user
         treasure.save()
-
     return HttpResponseRedirect('/')
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            u = form.cleaned_data['username']
+            p = form.cleaned_data['password']
+            user = authenticate(username = u, password = p)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    print("The account has been disabled!")
+            else:
+                print("The username and/or password were incorrect.")
+    else:
+        form = LoginForm()
+        return render(request, 'login.html',
+                        {'form': form})
