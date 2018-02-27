@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
+from django.conf import settings
+from django.views.static import serve
 from django.urls import path
 from main_app import views
 
@@ -22,4 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^([0-9]+)/$', views.detail, name = 'detail'),
+    url(r'^post_treasure/$', views.post_treasure, name = 'post_treasure'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve,
+            {'document_root': settings.MEDIA_ROOT,}),
+    ]

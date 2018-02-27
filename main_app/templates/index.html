@@ -13,7 +13,7 @@
           <a href="/{{treasure.id}}/"><h2 class="panel-title">{{treasure.name}}</h2></a>
         </div>
         <div class="treasure-photo">
-          <img src="{{ treasure.img_url }}" height="100" alt="">
+          <img src="{{ treasure.imgage.url }}" height="100" alt="">
         </div>
       </div>
     </div>
@@ -22,4 +22,9 @@
     {% endif %}
   </div>
     {% endfor %}
+    <form enctype="multipart/form-data" class="new_treasure" action="post_treasure/" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" name="" value="Submit">
+    </form>
 {% endblock %}
