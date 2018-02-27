@@ -3,7 +3,7 @@
 
 {% block content %}
   <div class="row">
-    <h1 class="text-center">TreasureGram</h1>
+    <h1 class="text-center">{{username}}</h1>
   </div>
   <div class="row">
     {% for treasure in treasures %}
@@ -11,9 +11,6 @@
       <div class="treasure panel panel-default">
         <div class="panel-heading">
           <a href="/{{treasure.id}}/"><h2 class="panel-title">{{treasure.name}}</h2></a>
-          <a href="/user/{{treasure.user.username}}/" class="panel-username">
-            by: {{treasure.user.username}}
-          </a>
         </div>
         <div class="treasure-photo">
           <img src="{{ treasure.imgage.url }}" height="100" alt="">

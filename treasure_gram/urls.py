@@ -22,6 +22,7 @@ from main_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^user/(\w+)/$', views.profile, name='profile'),
     url(r'^$', views.index),
     url(r'^([0-9]+)/$', views.detail, name = 'detail'),
     url(r'^post_treasure/$', views.post_treasure, name = 'post_treasure'),
